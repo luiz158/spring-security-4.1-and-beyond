@@ -41,6 +41,9 @@ angular.module('secure-messaging-app', [
 	};
 
 	var init = function() {
+		if($location.path() != '' && $location.path() != '/login') {
+			$scope.getCurrentPrincipal();
+		}
 	};
 
 	init();
