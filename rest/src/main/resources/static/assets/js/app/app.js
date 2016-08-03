@@ -12,8 +12,9 @@ angular.module('secure-messaging-app', [
 	var responseError = function(response) {
 		if (response.status === 401) {
 			$location.path('/login');
+			return $q.reject(response);
 		}
-		$q.reject(response);
+		return response;
 	};
 
 	return {
