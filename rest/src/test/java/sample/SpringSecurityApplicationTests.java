@@ -54,27 +54,27 @@ import sample.data.User;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = RestApplication.class)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(secure = false)
 @Transactional
-@WithUserDetails("joe@example.com")
+//@WithMockUser
 public class SpringSecurityApplicationTests {
 	@Autowired
 	MockMvc mockMvc;
 
-	@Test
-	@WithAnonymousUser
-	public void securityEnabled() throws Exception {
-		mockMvc
-				.perform(get("messages/inbox")
-				.header("X-Requested-With", "XMLHttpRequest"))
-				.andExpect(status().isUnauthorized());
-	}
+//	@Test
+//	@WithAnonymousUser
+//	public void securityEnabled() throws Exception {
+//		mockMvc
+//				.perform(get("messages/inbox")
+//				.header("X-Requested-With", "XMLHttpRequest"))
+//				.andExpect(status().isUnauthorized());
+//	}
 
 	@Test
 	public void deleteJoesMessage() throws Exception {
 		mockMvc.perform(delete("/messages/{id}", 110L)
-				.header("X-Requested-With", "XMLHttpRequest")
-				.with(csrf()))
+				.header("X-Requested-With", "XMLHttpRequest"))
+//				.with(csrf()))
 				.andExpect(status().isOk());
 	}
 
@@ -145,7 +145,7 @@ public class SpringSecurityApplicationTests {
 
 		mockMvc.perform(post("/messages")
 				.header("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE)
-				.with(csrf())
+//				.with(csrf())
 				.content(body))
 			.andExpect(status().is2xxSuccessful());
 	}
@@ -159,7 +159,7 @@ public class SpringSecurityApplicationTests {
 
 		mockMvc.perform(post("/messages")
 				.header("Content-Type", MediaType.APPLICATION_JSON_UTF8_VALUE)
-				.with(csrf())
+//				.with(csrf())
 				.content(body))
 			.andExpect(status().isBadRequest());
 	}
