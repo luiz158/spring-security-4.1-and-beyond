@@ -27,6 +27,6 @@ angular.module('secure-messaging-app.router', ['ngRoute',
         controller  : 'viewMessageController'
     })
 
-	.otherwise({redirectTo:'/'});
+	.otherwise({redirectTo:'/inbox'});
 }])
 ;

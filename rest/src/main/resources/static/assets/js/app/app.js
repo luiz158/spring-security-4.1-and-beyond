@@ -41,7 +41,6 @@ angular.module('secure-messaging-app', [
 	};
 
 	var init = function() {
-		$location.path('/inbox');
 	};
 
 	init();
